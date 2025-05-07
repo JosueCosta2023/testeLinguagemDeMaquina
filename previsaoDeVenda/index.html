@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Previsão de Sorvetes 🍨</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ml5.js e TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Primeiro os dados, qualquer variavel global fica acessivel em todo o sistema de arquivos-->
+    <script src="dadosTreino.js"></script>
+    <!-- Depois o controle -->
+    <script src="modeloTreino.js"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <!-- Card bonito do Bootstrap -->
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">⌛💲Previsão de Vendas💲⌛ <br>🍨Sorvetes🍨</h1>
+
+                        <!-- Formulário de seleção -->
+                        <div class="mb-3">
+                            <label for="dia" class="form-label">Dia da Semana:</label>
+                            <select id="dia" class="form-select">
+                                <option value="">--Selecionar--</option>
+                                <option value="1">Segunda</option>
+                                <option value="2">Terça</option>
+                                <option value="3">Quarta</option>
+                                <option value="4">Quinta</option>
+                                <option value="5">Sexta</option>
+                                <option value="6">Sábado</option>
+                                <option value="7">Domingo</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="clima" class="form-label">Clima:</label>
+                            <select id="clima" class="form-select">
+                                <option value="">--Selecionar--</option>
+                                <option value="1">☀️ Sol</option>
+                                <option value="0">⛈️ Chuva</option>
+                                <option value="2">🌥️ Nublado</option>
+                                <option value="3">🌬️ Ventania</option>
+                                <option value="4">❄️ Frio</option>
+                            </select>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="d-grid gap-2 mb-3">
+                            <button class="btn btn-primary" onclick="treinar()">⚙️ Treinar Modelo</button>
+                            <button class="btn btn-success" onclick="prever()">🔍 Prever Sorvetes</button>
+                        </div>
+
+                        <!-- Resultado -->
+                        <div id="resultado" class="alert alert-info text-center" role="alert">
+                            Previsão aparecerá aqui!
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

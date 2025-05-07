@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini ML com JavaScript</title>
+    <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- Adicionar o TensorFlow.js -->
+</head>
+
+<body>
+
+    <h1>Mini Machine Learning com ml5.js</h1>
+    <button onclick="treinar()">Treinar Modelo</button>
+    <button onclick="prever()">Prever Resultado</button>
+
+    <h2 id="resultado"></h2>
+
+    <script>
+        let model;
+
+        async function treinar() {
+            await tf.ready(); // 🔥 ESPERAR o TensorFlow estar pronto!
+
+            model = ml5.neuralNetwork({ task: 'regression', debug: true });
+
+            model.addData({ x: 1 }, { y: 2 });
+            model.addData({ x: 2 }, { y: 4 });
+            model.addData({ x: 3 }, { y: 6 });
+            model.addData({ x: 4 }, { y: 8 });
+
+            model.normalizeData();
+
+            model.train({ epochs: 50 }, () => {
+                console.log('Treinamento concluído!');
+                alert('Modelo treinado com sucesso!');
+            });
+        }
+
+        async function prever() {
+            await tf.ready();
+
+            if (!model) {
+                alert("Treine o modelo primeiro!");
+                return;
+            }
+
+            try {
+                const entrada = { x: 5 };
+                const result = await model.predict(entrada);
+                document.getElementById('resultado').innerText =
+                    `Previsão para x = 5: y = ${result[0].value.toFixed(2)}`;
+            } catch (err) {
+                console.error("Erro ao prever:", err);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
